@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DoctorApi.Data\DoctorApi.Data.csproj" />
+    <ProjectReference Include="..\DoctorApi.Domain\DoctorApi.Domain.csproj" />
+    <ProjectReference Include="..\DoctorApi.Messaging.Send\DoctorApi.Messaging.Send.csproj" />
+  </ItemGroup>
+
+</Project>
