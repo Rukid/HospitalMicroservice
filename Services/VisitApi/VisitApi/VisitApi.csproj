@@ -17,9 +17,17 @@
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
     <PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VisitApi.Data\VisitApi.Data.csproj" />
+    <ProjectReference Include="..\VisitApi.Domain\VisitApi.Domain.csproj" />
+    <ProjectReference Include="..\VisitApi.Messaging.Receive\VisitApi.Messaging.Receive.csproj" />
+    <ProjectReference Include="..\VisitApi.Service\VisitApi.Service.csproj" />
   </ItemGroup>
 
 

@@ -37,7 +37,6 @@ namespace VisitApi.Service.Services
             }
             catch (Exception ex)
             {
-                // log an error message here
                 Debug.WriteLine(ex.Message);
             }
         }

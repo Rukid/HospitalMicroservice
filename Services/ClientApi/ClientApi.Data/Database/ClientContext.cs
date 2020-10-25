@@ -21,12 +21,12 @@ namespace ClientApi.Data.Database
             {
                 new GenderType
                 {
-                    Id = 0,
+                    Id = 1,
                     Type = "male"
                 },
                 new GenderType
                 {
-                    Id = 1,
+                    Id = 2,
                     Type = "female"
                 }
             };
@@ -40,7 +40,7 @@ namespace ClientApi.Data.Database
                     BirthDate = new DateTime(1991, 1, 1),
                     Address = "Lenina street 52",
                     PhoneNumber = "8239485762",
-                    GenderId = 0
+                    GenderId = 1
                 },
                 new Client {
                     Id = Guid.Parse("334feb16-d7bb-4ca9-ab56-f4fadeb88d21"),
@@ -49,7 +49,7 @@ namespace ClientApi.Data.Database
                     BirthDate = new DateTime(1995, 5, 21),
                     Address = "Lenina street 32",
                     PhoneNumber = "8232157623",
-                    GenderId = 0
+                    GenderId = 1
                 }
             };
 

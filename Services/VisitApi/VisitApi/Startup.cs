@@ -15,18 +15,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using OrderApi.Data.Database;
-using OrderApi.Data.Repository.v1;
-using OrderApi.Domain;
-using OrderApi.Messaging.Receive.Options.v1;
-using OrderApi.Messaging.Receive.Receiver.v1;
-using OrderApi.Models.v1;
-using OrderApi.Service.v1.Command;
-using OrderApi.Service.v1.Query;
-using OrderApi.Service.v1.Services;
-using OrderApi.Validators.v1;
+using VisitApi.Data.Database;
+using VisitApi.Data.Repository;
+using VisitApi.Domain;
+using VisitApi.Messaging.Receive.Options;
+using VisitApi.Messaging.Receive.Receiver;
+using VisitApi.Models;
+using VisitApi.Service.Command;
+using VisitApi.Service.Query;
+using VisitApi.Service.Services;
+using VisitApi.Validators;
 
-namespace OrderApi
+namespace VisitApi
 {
     public class Startup
     {
@@ -43,7 +43,7 @@ namespace OrderApi
 
             services.Configure<RabbitMqConfiguration>(Configuration.GetSection("RabbitMq"));
 
-            services.AddDbContext<OrderContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            services.AddDbContext<VisitContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -85,22 +85,22 @@ namespace OrderApi
                 };
             });
 
-            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(ICustomerNameUpdateService).Assembly);
+            services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(IClientUpdateService).Assembly);
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IVisitRepository, VisitRepository>();
 
-            services.AddTransient<IValidator<OrderModel>, OrderModelValidator>();
+            services.AddTransient<IValidator<VisitModel>, VisitModelValidator>();
 
-            services.AddTransient<IRequestHandler<GetPaidOrderQuery, List<Order>>, GetPaidOrderQueryHandler>();
-            services.AddTransient<IRequestHandler<GetOrderByIdQuery, Order>, GetOrderByIdQueryHandler>();
-            services.AddTransient<IRequestHandler<GetOrderByCustomerGuidQuery, List<Order>>, GetOrderByCustomerGuidQueryHandler>();
-            services.AddTransient<IRequestHandler<CreateOrderCommand, Order>, CreateOrderCommandHandler>();
-            services.AddTransient<IRequestHandler<PayOrderCommand, Order>, PayOrderCommandHandler>();
-            services.AddTransient<IRequestHandler<UpdateOrderCommand>, UpdateOrderCommandHandler>();
-            services.AddTransient<ICustomerNameUpdateService, CustomerNameUpdateService>();
+            services.AddTransient<IRequestHandler<GetInitialVisitsQuery, List<Visit>>, GetInitialVisitsQueryHandler>();
+            services.AddTransient<IRequestHandler<GetVisitByIdQuery, Visit>, GetVisitByIdQueryHandler>();
+            services.AddTransient<IRequestHandler<GetVisitByClientGuidQuery, List<Visit>>, GetVisitByClientGuidQueryHandler>();
+            services.AddTransient<IRequestHandler<CreateVisitCommand, Visit>, CreateVisitCommandHandler>();
+            services.AddTransient<IRequestHandler<VisitCompletedCommand, Visit>, VisitCompletedCommandHandler>();
+            services.AddTransient<IRequestHandler<UpdateVisitCommand>, UpdateVisitCommandHandler>();
+            services.AddTransient<IClientUpdateService, ClientUpdateService>();
 
-            services.AddHostedService<CustomerFullNameUpdateReceiver>();
+            services.AddHostedService<ClientUpdateReceiver>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

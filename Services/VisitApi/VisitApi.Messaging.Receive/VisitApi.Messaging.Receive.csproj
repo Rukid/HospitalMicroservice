@@ -5,11 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VisitApi.Data\VisitApi.Data.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Receiver\" />
+    <ProjectReference Include="..\VisitApi.Data\VisitApi.Data.csproj" />
+    <ProjectReference Include="..\VisitApi.Service\VisitApi.Service.csproj" />
   </ItemGroup>
 
 </Project>
